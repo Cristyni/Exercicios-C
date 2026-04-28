@@ -1,0 +1,76 @@
+/* 9)Faça um programa que simule um jogo, onde o usuário deverá descobrir um número aleatório escolhido pelo computador 
+(de 1 a 100). O usuário poderá realizar até 6 tentativas, o programa deverá retornar as mensagens “muito alto”,
+“muito baixo” até o usuário acertar o número ou esgotar o número máximo de tentativas.*/
+
+ //bibliotecas utilizadas
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <math.h>
+ #include <time.h>
+
+ //função principal
+ int main(){
+
+    //criando a variável que guarda o número de tentativas do usuário
+    int tentativas = 1;
+
+    //variável que guardará o palpite do usuário
+    int palpite;
+
+    //variável que guardará o número aleatório sorteado pelo computador
+    int numero;
+
+    //variável com o número de acertos
+    int acertos = 0;
+
+    /*função 'srand' onde faz com que o computador sorteie números diferentes (ja que ele tende a mostrar números aleatórios, porém com um certo padrão, teendendo a repetilos)*/
+    srand(time(NULL));
+    
+    /*usando a função 'rand' para pedir para o computador mostrar um número aleatório, porém delimitando os números a serem sorteados (nesse caso, delimitamos números de 1 a 100)*/
+    numero = rand() %100 + 1;
+
+    //mostrando ao usuário o que ele deverá fazer
+    printf("\nEstou pensando em um número de 1 a 100..\n Tente adivinhar!\n");
+
+    /*enquanto o valor das tentativas forem menores do que 6 E o valor de acertos forem iguais a 0, será executado os códigos dentro das chaves do 'while', até que ambas as condições sejam diferentes do que foi pedido*/
+    while( tentativas <= 6 && acertos == 0){
+
+        /*Como inicialmente o número de tentativas é 1 (que é menor que 6) e o número de acertos é igual 0, assim que aparecer as apresentações do jogo, já aparecerá a mensagem mostrando o número de tentativas do momento e uma mensagem pedindo ao usuário para digitar seu palpite*/
+        printf("\nTentativa %i , digite seu palpite: ", tentativas);
+        //guardando o valor digitado pelo usuário na variável 'palpite'
+        scanf("%i", &palpite);
+
+        /*Se o valor do palpite for menor do que o número sorteado pelo computador, aparecerá o código dentro das chaves do 'if'*/
+        if(palpite < numero){
+            //mensagem dizendo que o palpite foi menor do que o número sorteado
+            printf("\nMuito baixo!\n");
+
+        /*Caso contrário, se palpite for maior que o número sorteado pelo computador, aparecerá o código dentro das chaves do 'else if'*/
+        }else if (palpite > numero){
+            //mensagem dizendo que o palpite é maior do que o número sorteado
+            printf("\nMuito alto!\n");
+
+        /*Caso contrário, se palpite for igual ao número sorteado pelo computador, aparecerá o código dentro das chaves do 'else if'*/
+        }else if(palpite == numero){
+            //mensagem avisando que o usuário acertou o número
+            printf("\nParabéns, você acertou o número!!\n");
+            /*Mudando o valor de acertos de 0 para 1, sendo assim, o laço de repetição se encerra aqui*/
+            acertos = 1;
+        }//else if
+
+        /*Após ser verificado qual foi o palpite do usuário, será adicionado +1 no valor de 'tentativas' e o laço voltará a se repetir até que 'tentativas' seja igual a 6*/
+        tentativas++;
+    }// while
+
+    /*se no final das tentativas o valor de acertos permanecer igual a 0, será executado os códigos dentro das chaves de 'if'*/
+    if(acertos == 0){
+
+    /*avisando ao usuário que o número de tentativas acabou e mostrando qual era o número sorteado pelo computador*/
+    printf("Infelizmente vc esgotou o número de tentativas..\n");
+    printf("O número era: %i\n", numero);
+    }//if
+
+    //após a finalização do código, retornará nenhum valor, encerrando completamente o código
+    return 0;
+
+ }//main
